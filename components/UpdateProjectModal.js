@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { updateProject } from '../actions'
-import { Button, Header, Icon, Modal, Form, TransitionablePortal } from 'semantic-ui-react'
+import { Button, Header, Icon, Modal, Form, TransitionablePortal, Label } from 'semantic-ui-react'
 
 class UpdateProject extends React.Component {
     constructor(props) {
@@ -14,13 +14,29 @@ class UpdateProject extends React.Component {
               status: props.project.status,
               timestamp: props.project.timestamp,
           },
-          showModal: false
+          showModal: false,
+          titleError: false,
+          contentError: false
       }
     }
 
-  update() { 
-    this.props.updateProject(this.state.project, this.props.project.id) 
-    this.closeModal()
+  update() {
+    let error = false
+
+    if (this.state.project.title.trim() == "")  {
+      this.setState({ titleError: true })
+      error = true
+    }
+
+    if (this.state.project.content.trim() == "")  {
+      this.setState({ contentError: true })
+      error = true
+    }
+
+    if (!error) {
+      this.props.updateProject(this.state.project, this.props.project.id) 
+      this.closeModal()
+    }
   }
 
   handleChange = (e) => {
@@ -38,8 +54,10 @@ class UpdateProject extends React.Component {
   }
 
   handleClick = () => {
-    this.setState({ showModal: true })
+    this.setState({ showModal: true, titleError: false, contentError: false })
   }
+
+  clearErrors = () => { this.setState({ titleError: false, contentError: false }) }
   
   closeModal = () => {
     this.setState({ showModal: false })
@@ -63,25 +81,48 @@ class UpdateProject extends React.Component {
         <Header content='Project Details' />
           <Modal.Content>
             <Form>
-            <Form.Dropdown
-              label='Status'
-              id='status'
-              placeholder="Select Options"
-              defaultValue={status}
-              fluid selection
-              options={options}
-              onChange={this.handleDropdown}
-              />
-            <Form.Input value={title} id="title" label='Title' placeholder='Title...' fluid onChange={this.handleChange.bind(this)} />
-            <Form.TextArea value={content} label='Content' id="content" placeholder='Content...' style={{ minHeight: 100 }} onChange={this.handleChange.bind(this)} />
+              <Form.Dropdown
+                label='Status'
+                id='status'
+                placeholder="Select Options"
+                defaultValue={status}
+                fluid selection
+                options={options}
+                onChange={this.handleDropdown}
+                />
+              <Form.Field>
+              <Form.Input 
+                value={title} 
+                id="title" 
+                label='Title' 
+                placeholder='Title...' 
+                fluid 
+                onChange={this.handleChange.bind(this)} 
+                />
+                {this.state.titleError && <Label pointing >Title cannot be empty!</Label>}
+              </Form.Field>
+              <Form.Field>
+              <Form.TextArea 
+                value={content} 
+                label='Content' 
+                id="content" 
+                placeholder='Content...'
+                style={{ minHeight: 100 }} 
+                onChange={this.handleChange.bind(this)} 
+                />
+                {this.state.contentError && <Label pointing >Content cannot be empty!</Label>}
+              </Form.Field>
             </Form>
           </Modal.Content>
         <Modal.Actions>
             <Button disabled={loading} onClick={this.closeModal} >
               <Icon name='remove' /> Cancel
             </Button>
-            <Button disabled={loading} onClick={this.update.bind(this)} color='blue'>
-              <Icon  name='checkmark' /> Update
+            <Button 
+              disabled={loading || !this.state.project.title || !this.state.project.content}
+              onClick={this.update.bind(this)} 
+              color='blue'>
+            <Icon  name='checkmark' /> Update
           </Button>
         </Modal.Actions>
       </Modal>

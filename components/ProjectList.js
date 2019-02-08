@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ProjectItem from './ProjectItem'
 import { fetchProjects, deleteProject } from '../actions'
-import { Form, Container,  Header, Divider, Dropdown, Table } from 'semantic-ui-react'
+import { Form, Container, Header, Divider, Transition, Table } from 'semantic-ui-react'
 import AddProjectModal from './AddProjectModal'
 
 class projectList extends React.Component{
@@ -49,15 +49,15 @@ class projectList extends React.Component{
                   <Table.HeaderCell textAlign='right'>ACTIONS</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
-              <Table.Body>
+              <Transition.Group as={Table.Body}>
                     {
                       projects && projects.map((project) => (
                         <ProjectItem key={project.id} project={project} deleteProject={this.delete}/>
                       ))
                     }
-                    </Table.Body>
-                    </Table>
-                    </Form>
+              </Transition.Group>
+              </Table>
+              </Form>
             </Container>
       ) 
   }
