@@ -30,35 +30,35 @@ class projectList extends React.Component{
 
       return (
           <Container text style={{ marginTop: '5em' }}>
-              <Header floated='right'>
-                <AddProjectModal />
-              </Header>
-              <Header as='h3' floated='left'>
-                <Header.Content>
-                  Project List
-                </Header.Content>
-              </Header>
-              <Divider clearing />
-              <Form loading={!projects}>
-              <Table color='black' selectable unstackable>
-              <Table.Header>
-                <Table.Row active>
-                  <Table.HeaderCell>TITLE</Table.HeaderCell>
-                  <Table.HeaderCell>CONTENT</Table.HeaderCell>
-                  <Table.HeaderCell>STATUS</Table.HeaderCell>
-                  <Table.HeaderCell textAlign='right'>ACTIONS</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Transition.Group as={Table.Body}>
-                    {
-                      projects && projects.map((project) => (
-                        <ProjectItem key={project.id} project={project} deleteProject={this.delete}/>
-                      ))
-                    }
-              </Transition.Group>
-              </Table>
-              </Form>
-            </Container>
+          <Header floated='right'>
+            <AddProjectModal />
+          </Header>
+          <Header as='h3' floated='left'>
+            <Header.Content>
+              Project List
+            </Header.Content>
+          </Header>
+          <Divider clearing />
+          <Form loading={!projects}>
+          <Table color='black' selectable unstackable>
+          <Table.Header>
+          <Table.Row active>
+          <Table.HeaderCell>TITLE</Table.HeaderCell>
+          <Table.HeaderCell>CONTENT</Table.HeaderCell>
+          <Table.HeaderCell>STATUS</Table.HeaderCell>
+          <Table.HeaderCell textAlign='right'>ACTIONS</Table.HeaderCell>
+          </Table.Row>
+          </Table.Header>
+            <Transition.Group as={Table.Body}>
+              {
+              projects && projects.map((project) => (
+              <ProjectItem key={project.id} project={project} deleteProject={this.delete}/>
+              ))
+              }
+            </Transition.Group>
+          </Table>
+          </Form>
+          </Container>
       ) 
   }
 }

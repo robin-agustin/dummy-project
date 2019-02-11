@@ -2,7 +2,6 @@
   "name": "dummy-project",
   "version": "1.0.0",
   "description": "test app",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -11,13 +10,13 @@
   "author": "robin agustin",
   "license": "ISC",
   "dependencies": {
-    "@firebase/app": "^0.1.9",
-    "@firebase/firestore": "^0.1.2",
+    "@zeit/next-typescript": "^1.1.1",
+    "dotenv": "^6.2.0",
     "firebase": "^5.8.2",
     "grpc": "^1.6.6",
     "next": "^7.0.2",
     "next-redux-wrapper": "^1.3.4",
-    "next-routes": "^1.4.2",
+    "now": "^13.1.3",
     "nprogress": "^0.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -25,10 +24,8 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
+    "save": "^2.3.3",
     "semantic-ui-react": "^0.84.0"
-  },
-  "resolutions": {
-    "terser": "3.14.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

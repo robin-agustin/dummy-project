@@ -12,8 +12,18 @@ const projectItem = (props) => {
     <Table.Cell>{_.capitalize(project.status)}</Table.Cell>
     <Table.Cell textAlign='right'>       
       <Popup
-        trigger={<Button size='mini' floated='right' circular color='red' icon='delete' />}
-        content={<Button onClick={deleteProject.bind(this, project.id)} icon='warning sign' size='medium' color='yellow' content='Delete?' />}
+        trigger={<Button 
+                  size='mini' 
+                  floated='right' 
+                  circular 
+                  color='red' 
+                  icon='delete' />}
+        content={<Button 
+                  onClick={deleteProject.bind(this, project.id)} 
+                  icon='warning sign' 
+                  size='medium' 
+                  color='yellow' 
+                  content='Delete?' />}
         on='click'
         hideOnScroll
         position='right center' />

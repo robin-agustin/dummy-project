@@ -50,11 +50,11 @@ class UpdateProject extends React.Component {
   }
 
   handleDropdown = (e, data) => {
-    this.setState({ project: { ...this.state.project, status: data.value} });
+    this.setState({ project: { ...this.state.project, status: data.value} })
   }
 
   handleClick = () => {
-    this.setState({ showModal: true, titleError: false, contentError: false })
+    this.setState({ showModal: true })
   }
 
   clearErrors = () => { this.setState({ titleError: false, contentError: false }) }
@@ -96,7 +96,8 @@ class UpdateProject extends React.Component {
                 id="title" 
                 label='Title' 
                 placeholder='Title...' 
-                fluid 
+                fluid
+                onClick={this.clearErrors} 
                 onChange={this.handleChange.bind(this)} 
                 />
                 {this.state.titleError && <Label pointing >Title cannot be empty!</Label>}
@@ -107,7 +108,8 @@ class UpdateProject extends React.Component {
                 label='Content' 
                 id="content" 
                 placeholder='Content...'
-                style={{ minHeight: 100 }} 
+                style={{ minHeight: 100 }}
+                onClick={this.clearErrors} 
                 onChange={this.handleChange.bind(this)} 
                 />
                 {this.state.contentError && <Label pointing >Content cannot be empty!</Label>}
