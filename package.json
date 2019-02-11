@@ -10,7 +10,11 @@
   "author": "robin agustin",
   "license": "ISC",
   "dependencies": {
-    "@zeit/next-typescript": "^1.1.1",
+    "@firebase/app": "^0.3.8",
+    "@firebase/app-types": "^0.3.3",
+    "@firebase/firestore": "^1.0.2",
+    "@firebase/util": "^0.2.6",
+    "@now/build-utils": "^0.4.34",
     "dotenv": "^6.2.0",
     "firebase": "^5.8.2",
     "grpc": "^1.6.6",
@@ -28,7 +32,6 @@
     "semantic-ui-react": "^0.84.0"
   },
   "devDependencies": {
-    "cross-env": "^5.2.0",
-    "terser-webpack-plugin": "^1.2.2"
+    "cross-env": "^5.2.0"
   }
 }
